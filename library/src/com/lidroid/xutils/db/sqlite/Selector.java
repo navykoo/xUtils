@@ -134,9 +134,20 @@ public class Selector {
             result.append(" WHERE ").append(whereBuilder.toString());
         }
         if (orderByList != null) {
-            for (int i = 0; i < orderByList.size(); i++) {
+        	//This is a bug apparently!
+            /*for (int i = 0; i < orderByList.size(); i++) {
                 result.append(" ORDER BY ").append(orderByList.get(i).toString());
-            }
+            }*/
+        	
+            //navykoo, 20150730
+            result.append(" ORDER BY ");
+            for (int i = 0; i < orderByList.size(); i++) {
+              if(i>0)
+              {
+                  result.append(",");
+              }
+              result.append(orderByList.get(i).toString());
+          }
         }
         if (limit > 0) {
             result.append(" LIMIT ").append(limit);
